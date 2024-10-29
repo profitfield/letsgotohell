@@ -6,8 +6,6 @@ import { ReferralScreen } from '@/screens/ReferralScreen';
 import { TripsScreen } from '@/screens/TripsScreen';
 import { Location } from '@/shared/lib/types/common';
 
-// ... остальной код
-
 type Screen = 'main' | 'booking' | 'referral' | 'trips';
 
 export const App: React.FC = () => {

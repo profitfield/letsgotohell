@@ -1,16 +1,17 @@
+// src/shared/ui/Input.tsx
 import React from 'react';
 import { clsx } from 'clsx';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
   icon?: React.ReactNode;
-  rightElement?: React.ReactNode;
   error?: string;
+  rightElement?: React.ReactNode;
 }
 
 export const Input: React.FC<InputProps> = ({
   icon,
-  rightElement,
   error,
+  rightElement,
   className,
   ...props
 }) => {
@@ -25,11 +26,10 @@ export const Input: React.FC<InputProps> = ({
         className={clsx(
           'w-full px-4 py-3 rounded-xl outline-none bg-tg-secondary',
           'text-tg-text placeholder:text-tg-hint',
-          {
-            'pl-12': icon,
-            'pr-12': rightElement,
-            'ring-2 ring-red-500': error
-          },
+          'focus:ring-2 focus:ring-tg-button/20',
+          icon && 'pl-12',
+          rightElement && 'pr-12',
+          error && 'ring-2 ring-red-500',
           className
         )}
         {...props}
@@ -39,7 +39,9 @@ export const Input: React.FC<InputProps> = ({
           {rightElement}
         </div>
       )}
-      {error && <div className="mt-1 text-sm text-red-500">{error}</div>}
+      {error && (
+        <div className="mt-1 text-sm text-red-500">{error}</div>
+      )}
     </div>
   );
 };

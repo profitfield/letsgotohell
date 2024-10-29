@@ -1,18 +1,18 @@
-// src/components/ui/Card.tsx
+// src/shared/ui/Card.tsx
 import React from 'react';
 import { clsx } from 'clsx';
 
 interface CardProps {
   children: React.ReactNode;
-  onClick?: () => void;
   className?: string;
+  onClick?: () => void;
   padding?: 'none' | 'sm' | 'md' | 'lg';
 }
 
 export const Card: React.FC<CardProps> = ({
   children,
-  onClick,
   className,
+  onClick,
   padding = 'md'
 }) => {
   const paddingStyles = {

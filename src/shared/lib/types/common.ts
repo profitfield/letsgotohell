@@ -38,7 +38,24 @@ export interface Mission {
   title: string;
   description: string;
   reward: number;
+  type: 'daily' | 'one-time' | 'recurring';
   progress: number;
   total: number;
   status: 'active' | 'completed' | 'locked';
+}
+
+export interface User {
+  id: string;
+  name: string;
+  phone: string;
+  referralCode?: string;
+}
+
+export interface PaymentMethod {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  status: 'active' | 'disabled' | 'soon';
+  type: 'ton' | 'cash' | 'card';
 }

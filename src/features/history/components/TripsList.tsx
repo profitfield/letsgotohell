@@ -1,7 +1,7 @@
 // src/features/history/components/TripsList.tsx
 import React from 'react';
 import { TripCard } from './TripCard';
-import { Trip } from '@/shared/lib/types/common';
+import type { Trip } from '@/shared/lib/types/common';
 
 interface TripsListProps {
   trips: Trip[];

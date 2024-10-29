@@ -3,17 +3,7 @@ import React from 'react';
 import { Wallet, CreditCard, AlertCircle, Info, CheckCircle, Banknote, Lock } from 'lucide-react';
 import { Modal } from '@/shared/ui/Modal';
 import { Card } from '@/shared/ui/Card';
-
-interface PaymentMethod {
-  id: string;
-  name: string;
-  icon: React.ReactNode;
-  description: string;
-  status: 'active' | 'disabled' | 'soon';
-  benefits?: string[];
-  mainColor: string;
-  securityInfo?: string;
-}
+import { PAYMENT_METHODS } from '@/shared/lib/constants';
 
 interface PaymentSelectProps {
   isOpen: boolean;
@@ -28,66 +18,59 @@ export const PaymentSelect: React.FC<PaymentSelectProps> = ({
   onSelect,
   selectedMethodId
 }) => {
-  const paymentMethods: PaymentMethod[] = [
-    {
-      id: 'ton',
-      name: 'TON Connect',
-      icon: (
-        <div className="w-10 h-10 bg-[#0098EA]/10 rounded-xl flex items-center justify-center">
-          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-            <path 
-              d="M12 2L3 7V17L12 22L21 17V7L12 2Z" 
-              stroke="#0098EA" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-      ),
-      description: 'Быстрые и безопасные платежи в TON',
-      status: 'active',
-      benefits: [
-        'Мгновенные транзакции',
-        'Минимальная комиссия',
-        'Безопасные платежи',
-        'Поддержка 24/7'
-      ],
-      mainColor: '#0098EA',
-      securityInfo: 'Транзакции защищены блокчейном TON'
-    },
-    {
-      id: 'cash',
-      name: 'Наличные',
-      icon: (
-        <div className="w-10 h-10 bg-green-500/10 rounded-xl flex items-center justify-center">
-          <Banknote className="w-6 h-6 text-green-500" />
-        </div>
-      ),
-      description: 'Оплата наличными водителю',
-      status: 'active',
-      benefits: [
-        'Оплата по факту',
-        'Без комиссии',
-        'Любая сумма',
-        'Чек при оплате'
-      ],
-      mainColor: '#22C55E',
-      securityInfo: 'Выдача чека обязательна'
-    },
-    {
-      id: 'card',
-      name: 'Банковская карта',
-      icon: (
-        <div className="w-10 h-10 bg-gray-500/10 rounded-xl flex items-center justify-center">
-          <CreditCard className="w-6 h-6 text-gray-500" />
-        </div>
-      ),
-      description: 'Скоро',
-      status: 'soon',
-      mainColor: '#6B7280'
+  const paymentMethods = PAYMENT_METHODS;
+
+  const getMethodIcon = (type: string) => {
+    switch (type) {
+      case 'ton':
+        return (
+          <div className="w-10 h-10 bg-[#0098EA]/10 rounded-xl flex items-center justify-center">
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
+              <path 
+                d="M12 2L3 7V17L12 22L21 17V7L12 2Z" 
+                stroke="#0098EA" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+        );
+      case 'cash':
+        return (
+          <div className="w-10 h-10 bg-green-500/10 rounded-xl flex items-center justify-center">
+            <Banknote className="w-6 h-6 text-green-500" />
+          </div>
+        );
+      default:
+        return (
+          <div className="w-10 h-10 bg-gray-500/10 rounded-xl flex items-center justify-center">
+            <CreditCard className="w-6 h-6 text-gray-500" />
+          </div>
+        );
     }
-  ];
+  };
+
+  const getMethodBenefits = (type: string) => {
+    switch (type) {
+      case 'ton':
+        return [
+          'Мгновенные транзакции',
+          'Минимальная комиссия',
+          'Безопасные платежи',
+          'Поддержка 24/7'
+        ];
+      case 'cash':
+        return [
+          'Оплата по факту',
+          'Без комиссии',
+          'Любая сумма',
+          'Чек при оплате'
+        ];
+      default:
+        return [];
+    }
+  };
 
   return (
     <Modal
@@ -114,7 +97,7 @@ export const PaymentSelect: React.FC<PaymentSelectProps> = ({
               onClick={() => method.status === 'active' && onSelect(method.id)}
             >
               <div className="flex items-start gap-3">
-                {method.icon}
+                {getMethodIcon(method.type)}
                 
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
@@ -131,29 +114,19 @@ export const PaymentSelect: React.FC<PaymentSelectProps> = ({
                     {method.description}
                   </div>
 
-                  {method.benefits && method.status === 'active' && (
+                  {method.status === 'active' && (
                     <div className="mt-3 grid grid-cols-2 gap-2">
-                      {method.benefits.map((benefit, index) => (
+                      {getMethodBenefits(method.type).map((benefit, index) => (
                         <div
                           key={index}
                           className="flex items-center gap-2"
                         >
-                          <CheckCircle 
-                            className="w-4 h-4" 
-                            style={{ color: method.mainColor }} 
-                          />
+                          <CheckCircle className="w-4 h-4 text-tg-button" />
                           <span className="text-sm text-tg-text">
                             {benefit}
                           </span>
                         </div>
                       ))}
-                    </div>
-                  )}
-
-                  {method.securityInfo && method.status === 'active' && (
-                    <div className="mt-3 flex items-center gap-2 text-sm text-tg-hint">
-                      <Lock className="w-4 h-4" />
-                      <span>{method.securityInfo}</span>
                     </div>
                   )}
                 </div>

@@ -13,7 +13,7 @@ export const RouteInfo: React.FC<RouteInfoProps> = ({ from, to, onEdit }) => {
   return (
     <Card className="bg-gray-50">
       <div className="space-y-4">
-        {/* Точка отправления */}
+        {/* From point */}
         <div className="flex items-start gap-3">
           <div className="flex-shrink-0 mt-1">
             <div className="w-3 h-3 rounded-full border-2 border-blue-500 bg-white" />
@@ -32,7 +32,7 @@ export const RouteInfo: React.FC<RouteInfoProps> = ({ from, to, onEdit }) => {
           )}
         </div>
 
-        {/* Точка прибытия */}
+        {/* To point */}
         <div className="flex items-start gap-3">
           <div className="flex-shrink-0 mt-1">
             <div className="w-3 h-3 rounded-full border-2 border-red-500 bg-white" />

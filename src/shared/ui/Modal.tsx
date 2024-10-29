@@ -1,6 +1,7 @@
-// src/components/ui/Modal.tsx
+// src/shared/ui/Modal.tsx
 import React, { useEffect } from 'react';
-import { X, ChevronLeft } from 'lucide-react';
+import { createPortal } from 'react-dom';
+import { ChevronLeft, X } from 'lucide-react';
 import { clsx } from 'clsx';
 
 interface ModalProps {
@@ -16,7 +17,7 @@ export const Modal: React.FC<ModalProps> = ({
   onClose,
   title,
   children,
-  showBackButton
+  showBackButton = false
 }) => {
   useEffect(() => {
     if (isOpen) {
@@ -31,14 +32,15 @@ export const Modal: React.FC<ModalProps> = ({
 
   if (!isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center">
-      <div
+  const modal = (
+    <div className="fixed inset-0 z-50">
+      <div 
         className="absolute inset-0 bg-black/50 transition-opacity"
         onClick={onClose}
       />
-      <div className="relative w-full bg-white rounded-t-[20px] max-h-[90vh]">
+      <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-[20px] max-h-[90vh] flex flex-col">
         <div className="absolute top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-gray-300 rounded-full" />
+
         <div className="sticky top-0 z-10 px-4 py-4 bg-white border-b border-gray-100">
           <div className="flex items-center min-h-[40px]">
             {showBackButton ? (
@@ -61,10 +63,13 @@ export const Modal: React.FC<ModalProps> = ({
             </h2>
           </div>
         </div>
-        <div className="overflow-y-auto max-h-[calc(90vh-80px)]">
+
+        <div className="overflow-y-auto">
           {children}
         </div>
       </div>
     </div>
   );
+
+  return createPortal(modal, document.body);
 };

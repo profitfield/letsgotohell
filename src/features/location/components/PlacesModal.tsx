@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 import { MapPin, Search, ChevronRight } from 'lucide-react';
 import { Modal } from '@/shared/ui/Modal';
-import { Location } from '@/shared/lib/types/common';
-import { POPULAR_PLACES, AIRPORTS } from '../data/places';
+import { Card } from '@/shared/ui/Card';
+import { POPULAR_PLACES, AIRPORTS } from '@/shared/lib/constants';
+import type { Location } from '@/shared/lib/types/common';
 
 interface PlacesModalProps {
   isOpen: boolean;
@@ -19,12 +20,15 @@ export const PlacesModal: React.FC<PlacesModalProps> = ({
   type
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const allPlaces = [...POPULAR_PLACES, ...AIRPORTS];
 
-  const filteredPlaces = allPlaces.filter(place =>
-    place.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    place.address.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const allPlaces = [...POPULAR_PLACES, ...AIRPORTS];
+  
+  const filteredPlaces = searchQuery
+    ? allPlaces.filter(place => 
+        place.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        place.address.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : allPlaces;
 
   return (
     <Modal
@@ -48,9 +52,9 @@ export const PlacesModal: React.FC<PlacesModalProps> = ({
         {/* Places list */}
         <div className="space-y-2">
           {filteredPlaces.map((place) => (
-            <button
+            <Card
               key={place.id}
-              className="w-full p-4 flex items-center gap-3 hover:bg-tg-secondary rounded-xl"
+              className="flex items-center gap-3 hover:bg-tg-secondary"
               onClick={() => {
                 onSelect(place);
                 onClose();
@@ -59,12 +63,12 @@ export const PlacesModal: React.FC<PlacesModalProps> = ({
               <div className="w-10 h-10 bg-tg-secondary rounded-xl flex items-center justify-center">
                 <MapPin className="w-5 h-5 text-tg-button" />
               </div>
-              <div className="flex-1 text-left">
+              <div className="flex-1">
                 <div className="font-medium">{place.name}</div>
                 <div className="text-sm text-tg-hint">{place.address}</div>
               </div>
               <ChevronRight className="w-5 h-5 text-tg-hint" />
-            </button>
+            </Card>
           ))}
 
           {filteredPlaces.length === 0 && (
