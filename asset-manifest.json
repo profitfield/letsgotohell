@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.28f8b8a5.css",
-    "main.js": "/static/js/main.5e28879e.js",
-    "index.html": "/index.html",
-    "main.28f8b8a5.css.map": "/static/css/main.28f8b8a5.css.map",
-    "main.5e28879e.js.map": "/static/js/main.5e28879e.js.map"
+    "main.css": "/letsgotohell/static/css/main.28f8b8a5.css",
+    "main.js": "/letsgotohell/static/js/main.5e28879e.js",
+    "index.html": "/letsgotohell/index.html",
+    "main.28f8b8a5.css.map": "/letsgotohell/static/css/main.28f8b8a5.css.map",
+    "main.5e28879e.js.map": "/letsgotohell/static/js/main.5e28879e.js.map"
   },
   "entrypoints": [
     "static/css/main.28f8b8a5.css",
