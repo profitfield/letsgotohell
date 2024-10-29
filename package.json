@@ -1,6 +1,7 @@
 {
   "name": "letsgotohell",
   "version": "0.1.0",
+  "homepage": "https://profitfield.github.io/letsgotohell",
   "private": true,
   "dependencies": {
     "@craco/craco": "^7.1.0",
@@ -27,6 +28,11 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
+    "repository": {
+    "type": "git",
+    "url": "https://github.com/profitfield/letsgotohell.git"
+  },
+
   "eslintConfig": {
     "extends": [
       "react-app",
