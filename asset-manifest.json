@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/letsgotohell/static/css/main.8ba5ee9e.css",
-    "main.js": "/letsgotohell/static/js/main.2b9823e7.js",
+    "main.css": "/letsgotohell/static/css/main.29b40c0e.css",
+    "main.js": "/letsgotohell/static/js/main.4db398de.js",
     "index.html": "/letsgotohell/index.html",
-    "main.8ba5ee9e.css.map": "/letsgotohell/static/css/main.8ba5ee9e.css.map",
-    "main.2b9823e7.js.map": "/letsgotohell/static/js/main.2b9823e7.js.map"
+    "main.29b40c0e.css.map": "/letsgotohell/static/css/main.29b40c0e.css.map",
+    "main.4db398de.js.map": "/letsgotohell/static/js/main.4db398de.js.map"
   },
   "entrypoints": [
-    "static/css/main.8ba5ee9e.css",
-    "static/js/main.2b9823e7.js"
+    "static/css/main.29b40c0e.css",
+    "static/js/main.4db398de.js"
   ]
 }
